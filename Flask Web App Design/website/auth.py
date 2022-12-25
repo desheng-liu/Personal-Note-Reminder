@@ -20,7 +20,7 @@ def login():
         password = request.form.get('password')
 
         user = User.query.filter_by(email=email).first()
-        if user:
+        if user: # if there is a user in our database
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
@@ -62,7 +62,7 @@ def sign_up():
         else:
             # once user's info passes all the check, we put it into our database
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(
-                password1, method='sha256'))
+                password1, method='sha256')) # user() function is in models.py, putting it into the database
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
