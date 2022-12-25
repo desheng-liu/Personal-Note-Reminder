@@ -5,6 +5,11 @@ from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 
+# GET request -- retrieving information, POST request -- updating or creating information
+# in other words, for GET request -- anytime user needs to see something, so in this case, rendering the template
+# for POST request - we are putting in either notes, putting the user into the database, writing to our backend.
+
+
 auth = Blueprint('auth', __name__)
 
 
@@ -55,6 +60,7 @@ def sign_up():
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
         else:
+            # once user's info passes all the check, we put it into our database
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
             db.session.add(new_user)

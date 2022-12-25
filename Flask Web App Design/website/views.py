@@ -6,6 +6,9 @@ import json
 
 views = Blueprint('views', __name__)
 
+# GET request -- retrieving information, POST request -- updating or creating information
+# in other words, for GET request -- anytime user needs to see something, so in this case, rendering the template
+# for POST request - we are putting in either notes, putting the user into the database, writing to our backend.
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required

@@ -14,8 +14,19 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+    <!-- 
+      everything above is Bootstrap CSS framework that has styling such as:
+      animations/button-presses/colors, i.e. all sorts of designs. The script
+      needed to actually get the Bootstrap CSS working is on the bottom.
+    --> 
 
     <title>{% block title %}Home{% endblock %}</title>
+
+    <!-- the "block" and "endblock" is the jinja templating that makes that 
+          spot a variable for the other html templates to fill in. If you see the 
+          other html files, they use "Title", "Sign Up" for the title instead of the "Home" title.
+     -->   
+     
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -40,17 +51,22 @@
       </div>
     </nav>
 
+    <!-- 
+      more special jinja stuff. we are going to display the "flashed" messages based on
+      whether user's inputted information was sucessfully put into database or not
+    -->  
+
     {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %} 
-    {% if category == 'error' %}
+    {% if messages %}{% for category, message in messages %} 
+
+    {% if category == 'error' %} <!-- error message, and make a dismissable button. all made easier by Bootstrap -->
     <div class="alert alert-danger alter-dismissable fade show" role="alert">
       {{ message }}
       <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    {% else %}
+    {% else %} <!-- success message -->
     <div class="alert alert-success alter-dismissable fade show" role="alert">
       {{ message }}
       <button type="button" class="close" data-dismiss="alert">
@@ -63,6 +79,12 @@
     {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
+    <!-- 
+      this "div" area literally contains all the information for each specific html template
+      we want for whatever route the user takes. We will put the necessary front-end designs in this container block
+      container is just the name. the div is the actual area. 
+    --> 
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

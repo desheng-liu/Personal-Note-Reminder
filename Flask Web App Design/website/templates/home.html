@@ -1,5 +1,12 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
+
+<!-- 
+  notice in this html file, we have regular python syntax where it 
+  says "for note in user.notes". That is what jinja templating is like. 
+  We can also display python varibles while doing a for loop (python syntax)
+-->       
+
+{% block content %}
     <h1 align="center">Notes</h1>
     <ul class="list-group list-group-flush" id="notes">
       {% for note in user.notes %}
@@ -18,4 +25,4 @@
         <button type="submit" class="btn btn-primary">Add Note</button>
       </div>
     </form>
-    {% endblock %}
+{% endblock %}
